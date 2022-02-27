@@ -7,10 +7,11 @@ public class CircleScript : MonoBehaviour
     [SerializeField]
     GameManager m_gameManager;
     [SerializeField]
-    GameObject redBtn, greenBtn, blueBtn, cyanBtn, magBtn, yellowBtn; //whiteBtn, blackBtn;
+    ButtonSelect redBtn, greenBtn, blueBtn, cyanBtn, magBtn, yellowBtn; //whiteBtn, blackBtn;
     [SerializeField]
     public SpriteRenderer m_SpriteRenderer;
     Color colorVal;
+    Color bgColor;
     Color Red = Color.red;
     Color Green = Color.green;
     Color Blue = Color.blue;
@@ -21,100 +22,151 @@ public class CircleScript : MonoBehaviour
     Color Black = Color.black;
     //Color colorSol;
     public SpriteRenderer m_background;
-
+    public int colourEnum;
     public bool solved = false;
     int BtnVal;
-    bool hasChanged = false;
-    bool positiveCol;
-    bool negativeCol;
+    public bool hasChanged = false;
+    public bool positiveCol;
+    public bool negativeCol;
+
+    public enum Colours
+    {
+        red = 0,
+        green = 1,
+        blue = 2,
+        cyan = 3,
+        magenta = 4,
+        yellow = 5,
+        //white = 6,
+        //black = 7
+    }
 
     delegate void clickDelegate(ButtonSelect Btn);
     clickDelegate click;
 
     
 
+
     // Start is called before the first frame update
     void Start()
     {
+        ColourSelect();
         //click = OnClick;
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SpriteRenderer.color = Color.gray;
         m_background = this.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        
+        this.positiveCol = true;
+        this.negativeCol = true;
+        //Debug.Log("Start, This.PositiveCol " + this.positiveCol);
+        //Debug.Log("Start, this.negativeCol " + this.negativeCol);
+        IEnumerable<ButtonSelect> my_slist = BtnList();
+        switch (colourEnum)
+        {
+            
+            case 0:
+                bgColor = Red;
+                m_background.GetComponent<SpriteRenderer>().color = bgColor;
+                foreach (var item in my_slist)
+                {
+                    item.btnActive(item.btnVal, colourEnum);
+                }
+                break;
+            case 1:
+                bgColor = Green;
+                m_background.GetComponent<SpriteRenderer>().color = bgColor;
+                foreach (var item in my_slist)
+                {
+                    item.btnActive(item.btnVal, colourEnum);
+                }
+                break;
+            case 2:
+                bgColor = Blue;
+                m_background.GetComponent<SpriteRenderer>().color = bgColor;
+                foreach (var item in my_slist)
+                {
+                    item.btnActive(item.btnVal, colourEnum);
+                }
+                break;
+            case 3:
+                bgColor = Cyan;
+                m_background.GetComponent<SpriteRenderer>().color = bgColor;
+                foreach (var item in my_slist)
+                {
+                    item.btnActive(item.btnVal, colourEnum);
+                }
+                break;
+            case 4:
+                bgColor = Magenta;
+                m_background.GetComponent<SpriteRenderer>().color = bgColor;
+                foreach (var item in my_slist)
+                {
+                    item.btnActive(item.btnVal, colourEnum);
+                }
+                break;
+            case 5:
+                bgColor = Yellow;
+                m_background.GetComponent<SpriteRenderer>().color = bgColor;
+                foreach (var item in my_slist)
+                {
+                    item.btnActive(item.btnVal, colourEnum);
+                }
+                break;
+            default:
+                Debug.Log("CS Start, : " + colourEnum);
+                break;
+        }
     }
+    public IEnumerable<ButtonSelect> BtnList()
+    {
+        List<ButtonSelect> my_list = new List<ButtonSelect>()
+        {redBtn, greenBtn, blueBtn, cyanBtn, magBtn, yellowBtn};
 
-    
-    
-    
-   
+        foreach (var items in my_list)
+        {
+            yield return items;
+        }
+
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<SpriteRenderer>().color == Red || GetComponent<SpriteRenderer>().color == Green || GetComponent<SpriteRenderer>().color == Blue)
-        {
-            positiveCol = true;
-        }
-        else
-            positiveCol = false;
 
-        if (GetComponent<SpriteRenderer>().color == Cyan || GetComponent<SpriteRenderer>().color == Magenta || GetComponent<SpriteRenderer>().color == Yellow)
-        {
-            negativeCol = true;
-        }
-        else
-            negativeCol = false;
-        //Debug.Log("Colour: " + BtnVal);
-        //ColourShift();
-        //if (hasChanged == true)
+        
+        //switch (colourEnum)
         //{
-        //    if (BtnVal == 0)
-        //    {
-        //        colorVal = Color.red;
-        //        ColourShift(colorVal);
-        //    }
-        //    else if (BtnVal == 1)
-        //    {
-        //        colorVal = Color.green;
-        //        ColourShift(colorVal);
-        //    }
-        //    else if (BtnVal == 2)
-        //    {
-        //        colorVal = Color.blue;
-        //        ColourShift(colorVal);
-        //    }
-        //    else if (BtnVal == 3)
-        //    {
-        //        colorVal = Color.cyan;
-        //        ColourShift(colorVal);
-        //    }
-        //    else if (BtnVal == 4)
-        //    {
-        //        colorVal = Color.magenta;
-        //        ColourShift(colorVal);
-        //    }
-        //    else if (BtnVal == 5)
-        //    {
-        //        colorVal = Color.yellow;
-        //        ColourShift(colorVal);
-        //    }
-        //else if (BtnVal == 6)
-        //{
-        //    colorVal = Color.white;
-        //    ColourShift(colorVal);
+        //    case 0:
+        //        bgColor = Red;
+        //        m_background.GetComponent<SpriteRenderer>().color = bgColor;
+        //        break;
+        //    case 1:
+        //        bgColor = Green;
+        //        m_background.GetComponent<SpriteRenderer>().color = bgColor;
+        //        break;
+        //    case 2:
+        //        bgColor = Blue;
+        //        m_background.GetComponent<SpriteRenderer>().color = bgColor;
+        //        break;
+        //    case 3:
+        //        bgColor = Cyan;
+        //        m_background.GetComponent<SpriteRenderer>().color = bgColor;
+        //        break;
+        //    case 4:
+        //        bgColor = Magenta;
+        //        m_background.GetComponent<SpriteRenderer>().color = bgColor;
+        //        break;
+        //    case 5:
+        //        bgColor = Yellow;
+        //        m_background.GetComponent<SpriteRenderer>().color = bgColor;
+        //        break;
         //}
-        //else if (BtnVal == 7)
-        //{
-        //    colorVal = Color.black;
-        //    ColourShift(colorVal);
-        //}
-        //}
-        //GetComponent<SpriteRenderer>().color = colorVal;
-        ////Debug.Log("Update, BtnVal: " + BtnVal);
-        //Debug.Log("Update, colorVal: " + colorVal);
-
+        
     }
     
+    public void ColourSelect()
+    {
+        colourEnum = Random.Range(0, 5);
+    }
     public void redClick(ButtonSelect button)
     {
         BtnVal = 0;
@@ -127,7 +179,11 @@ public class CircleScript : MonoBehaviour
             colorVal = Red;
             ColourShift(colorVal);
         }
-        
+        if (GetComponent<SpriteRenderer>().color == m_background.color)
+        {
+            this.solved = true;
+            m_gameManager.nextRnd();
+        }
     }
 
     public void greenClick(ButtonSelect button)
@@ -139,6 +195,11 @@ public class CircleScript : MonoBehaviour
         {
             colorVal = Green;
             ColourShift(colorVal);
+        }
+        if (GetComponent<SpriteRenderer>().color == m_background.color)
+        {
+            this.solved = true;
+            m_gameManager.nextRnd();
         }
     }
 
@@ -152,6 +213,11 @@ public class CircleScript : MonoBehaviour
             colorVal = Blue;
             ColourShift(colorVal);
         }
+        if (GetComponent<SpriteRenderer>().color == m_background.color)
+        {
+            this.solved = true;
+            m_gameManager.nextRnd();
+        }
     }
 
     public void cyanClick(ButtonSelect button)
@@ -159,6 +225,16 @@ public class CircleScript : MonoBehaviour
         BtnVal = 3;
         Debug.Log(button + " pressed");
         hasChanged = true;
+        if (hasChanged == true)
+        {
+            colorVal = Cyan;
+            ColourShift(colorVal);
+        }
+        if (GetComponent<SpriteRenderer>().color == m_background.color)
+        {
+            this.solved = true;
+            m_gameManager.nextRnd();
+        }
     }
 
     public void magClick(ButtonSelect button)
@@ -166,6 +242,16 @@ public class CircleScript : MonoBehaviour
         BtnVal = 4;
         Debug.Log(button + " pressed");
         hasChanged = true;
+        if (hasChanged == true)
+        {
+            colorVal = Magenta;
+            ColourShift(colorVal);
+        }
+        //if (GetComponent<SpriteRenderer>().color == m_background.color)
+        //{
+        //    this.solved = true;
+        //    m_gameManager.nextRnd();
+        //}
     }
 
     public void yellowClick(ButtonSelect button)
@@ -173,6 +259,16 @@ public class CircleScript : MonoBehaviour
         BtnVal = 5;
         Debug.Log(button + " pressed");
         hasChanged = true;
+        if (hasChanged == true)
+        {
+            colorVal = Yellow;
+            ColourShift(colorVal);
+        }
+        if (GetComponent<SpriteRenderer>().color == m_background.color)
+        {
+            this.solved = true;
+            m_gameManager.nextRnd();
+        }
     }
     public void ColourShift(Color col)
     {
@@ -186,14 +282,17 @@ public class CircleScript : MonoBehaviour
                     if (col == Red)
                     {
                         colorVal = Red;
+                        
                     }
                     else if (col == Green)
                     {
-                        colorVal = Yellow; 
+                        colorVal = Yellow;
+                        
                     }
                     else if (col == Blue)
                     {
                         colorVal = Magenta;
+                        
                     }
                     //else if (col == Cyan)
                     //{
@@ -210,11 +309,13 @@ public class CircleScript : MonoBehaviour
                     else if (col == White)
                     {
                         colorVal = Red;
+                        
                     }
                     //else if (col == Black)
                     //{
 
                     //}
+                   
                     break;
                     
                 case false:
@@ -261,14 +362,17 @@ public class CircleScript : MonoBehaviour
                     if (col == Red)
                     {
                         colorVal = Yellow;
+                        
                     }
                     else if (col == Green)
                     {
                         colorVal = Green;
+                        
                     }
                     else if (col == Blue)
                     {
                         colorVal = Cyan;
+                        
                     }
                     //else if (col == Cyan)
                     //{
@@ -285,6 +389,7 @@ public class CircleScript : MonoBehaviour
                     else if (col == White)
                     {
                         colorVal = Green;
+                        
                     }
                     //else if (col == Black)
                     //{
@@ -336,14 +441,17 @@ public class CircleScript : MonoBehaviour
                     if (col == Red)
                     {
                         colorVal = Magenta;
+                        
                     }
                     else if (col == Green)
                     {
-                        colorVal = Magenta;
+                        colorVal = Cyan;
+                        
                     }
                     else if (col == Blue)
                     {
                         colorVal = Blue;
+                        
                     }
                     //else if (col == Cyan)
                     //{
@@ -360,6 +468,7 @@ public class CircleScript : MonoBehaviour
                     else if (col == White)
                     {
                         colorVal = Blue;
+                        
                     }
                     //else if (col == Black)
                     //{
@@ -408,34 +517,38 @@ public class CircleScript : MonoBehaviour
             switch (m_add)
             {
                 case true:
-                    if (col == Red)
-                    {
-
-                    }
-                    else if (col == Green)
-                    {
-
-                    }
-                    else if (col == Blue)
-                    {
-
-                    }
-                    else if (col == Cyan)
-                    {
-
-                    }
-                    else if (col == Magenta)
-                    {
-
-                    }
-                    else if (col == Yellow)
-                    {
-
-                    }
-                    //else if (col == White)
+                    //if (col == Red)
                     //{
 
                     //}
+                    //else if (col == Green)
+                    //{
+
+                    //}
+                    //else if (col == Blue)
+                    //{
+
+                    //}
+                    if (col == Cyan)
+                    {
+                        colorVal = Cyan;
+                        
+                    }
+                    else if (col == Magenta)
+                    {
+                        colorVal = Blue;
+                        
+                    }
+                    else if (col == Yellow)
+                    {
+                        colorVal = Green;
+                        
+                    }
+                    else if (col == White)
+                    {
+                        colorVal = Cyan;
+                        
+                    }
                     //else if (col == Black)
                     //{
 
@@ -483,34 +596,38 @@ public class CircleScript : MonoBehaviour
             switch (m_add)
             {
                 case true:
-                    if (col == Red)
-                    {
-
-                    }
-                    else if (col == Green)
-                    {
-
-                    }
-                    else if (col == Blue)
-                    {
-
-                    }
-                    else if (col == Cyan)
-                    {
-
-                    }
-                    else if (col == Magenta)
-                    {
-
-                    }
-                    else if (col == Yellow)
-                    {
-
-                    }
-                    //else if (col == White)
+                    //if (col == Red)
                     //{
 
                     //}
+                    //else if (col == Green)
+                    //{
+
+                    //}
+                    //else if (col == Blue)
+                    //{
+
+                    //}
+                    if (col == Cyan)
+                    {
+                        colorVal = Blue;
+                        
+                    }
+                    else if (col == Magenta)
+                    {
+                        colorVal = Magenta;
+                        
+                    }
+                    else if (col == Yellow)
+                    {
+                        colorVal = Red;
+                        
+                    }
+                    else if (col == White)
+                    {
+                        colorVal = Magenta;
+                        
+                    }
                     //else if (col == Black)
                     //{
 
@@ -558,34 +675,38 @@ public class CircleScript : MonoBehaviour
             switch (m_add)
             {
                 case true:
-                    if (col == Red)
-                    {
-
-                    }
-                    else if (col == Green)
-                    {
-
-                    }
-                    else if (col == Blue)
-                    {
-
-                    }
-                    else if (col == Cyan)
-                    {
-
-                    }
-                    else if (col == Magenta)
-                    {
-
-                    }
-                    else if (col == Yellow)
-                    {
-
-                    }
-                    //else if (col == White)
+                    //if (col == Red)
                     //{
 
                     //}
+                    //else if (col == Green)
+                    //{
+
+                    //}
+                    //else if (col == Blue)
+                    //{
+
+                    //}
+                    if (col == Cyan)
+                    {
+                        colorVal = Green;
+                        
+                    }
+                    else if (col == Magenta)
+                    {
+                        colorVal = Red;
+                        
+                    }
+                    else if (col == Yellow)
+                    {
+                        colorVal = Yellow;
+                        
+                    }
+                    else if (col == White)
+                    {
+                        colorVal = Yellow;
+                        
+                    }
                     //else if (col == Black)
                     //{
 
@@ -642,7 +763,45 @@ public class CircleScript : MonoBehaviour
         //        m_add = false;
         //    }      
         //}
+        //if (positiveCol == true)
+        //{
+        //    redBtn.gameObject.SetActive(true);
+        //    greenBtn.gameObject.SetActive(true);
+        //    blueBtn.gameObject.SetActive(true);
+        //    cyanBtn.gameObject.SetActive(false);
+        //    magBtn.gameObject.SetActive(false);
+        //    yellowBtn.gameObject.SetActive(false);
+        //    Debug.Log("positiveCol Status, True:" + positiveCol);
+        //}
+        //else if (positiveCol == false)
+        //{
+        //    redBtn.gameObject.SetActive(false);
+        //    greenBtn.gameObject.SetActive(false);
+        //    blueBtn.gameObject.SetActive(false);
+        //    cyanBtn.gameObject.SetActive(true);
+        //    magBtn.gameObject.SetActive(true);
+        //    yellowBtn.gameObject.SetActive(true);
+        //    Debug.Log("positiveCol Status, False:" + positiveCol);
+        //}
+        //if (negativeCol == true)
+        //{
+        //    cyanBtn.gameObject.SetActive(true);
+        //    magBtn.gameObject.SetActive(true);
+        //    yellowBtn.gameObject.SetActive(true);
+        //    redBtn.gameObject.SetActive(false);
+        //    greenBtn.gameObject.SetActive(false);
+        //    blueBtn.gameObject.SetActive(false);
+        //    Debug.Log("negativeCol Status, True:" + negativeCol);
+        //}
+        //else if (negativeCol == false)
+        //{
+        //    cyanBtn.gameObject.SetActive(false);
+        //    magBtn.gameObject.SetActive(false);
+        //    yellowBtn.gameObject.SetActive(false);
+        //    Debug.Log("negativeCol Status, False:" + negativeCol);
+        //}
         GetComponent<SpriteRenderer>().color = colorVal;
+        
     }
 
     
@@ -708,41 +867,5 @@ public class CircleScript : MonoBehaviour
         }
         Debug.Log("OnClick, Colour: " + BtnVal);
     }
-    void ActiveCircles()
-    {
-        //first circle
-        if (m_gameManager.circles == 0)
-        {
-            if (this.tag == "C2" || this.tag == "C3")
-            {
-                this.m_SpriteRenderer.enabled = false;
-            }
-            //else if (this.tag == "C1")
-            //{
-            //    this.m_SpriteRenderer.enabled = true;
-            //}
-        }
-        //second circle
-        else if (m_gameManager.circles == 1)
-        {
-            if (this.tag == "C1" || this.tag == "C3")
-            {
-                this.m_SpriteRenderer.enabled = false;
-            }
-            else
-                this.m_SpriteRenderer.enabled = true;
-        }
-        //third circle
-        else if (m_gameManager.circles == 2)
-        {
-            if (this.tag == "C1" || this.tag == "C2")
-            {
-                this.m_SpriteRenderer.enabled = false;
-            }
-            else
-                this.m_SpriteRenderer.enabled = true;
-        }
-        else
-            this.m_SpriteRenderer.enabled = true;
-    }
+    
 }

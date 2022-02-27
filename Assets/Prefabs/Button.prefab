@@ -270,5 +270,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dea829d29b2d5c4fa776c2787e820ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gameManager: {fileID: 0}
+  m_gameManager: {fileID: 8594535216863214920, guid: e2e3ba09f990d064083c40f34865295a, type: 3}
+  Circle1: {fileID: 5471030321887789978, guid: 792ebaab97cc73e4cb0c4256edd8d0fb, type: 3}
+  Circle2: {fileID: 5471030321887789978, guid: 792ebaab97cc73e4cb0c4256edd8d0fb, type: 3}
+  Circle3: {fileID: 5471030321887789978, guid: 792ebaab97cc73e4cb0c4256edd8d0fb, type: 3}
   btnVal: 0
+  positiveCol: 0
+  negativeCol: 0
+  button: {fileID: 0}

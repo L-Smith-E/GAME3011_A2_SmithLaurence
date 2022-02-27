@@ -106,7 +106,7 @@ PrefabInstance:
     - target: {fileID: 7943067838618128487, guid: 021eb57ae9e84e145980f1a3dcf524ce, type: 3}
       propertyPath: button
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4081185027663491005}
     - target: {fileID: 7943067838618128487, guid: 021eb57ae9e84e145980f1a3dcf524ce, type: 3}
       propertyPath: m_gameManager
       value: 
@@ -166,6 +166,10 @@ PrefabInstance:
     - target: {fileID: 8838272916016941651, guid: 021eb57ae9e84e145980f1a3dcf524ce, type: 3}
       propertyPath: m_Name
       value: CyanBtn Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838272916016941651, guid: 021eb57ae9e84e145980f1a3dcf524ce, type: 3}
+      propertyPath: m_TagString
+      value: cyanBtn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 021eb57ae9e84e145980f1a3dcf524ce, type: 3}
